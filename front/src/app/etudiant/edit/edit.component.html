@@ -1,0 +1,67 @@
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mt-4">Ajouter un etudiant</h6>
+    <div class="mt-4">
+        <form *ngIf="etudiants &&  classes" [formGroup]="formModal" (ngSubmit)="onSubmit()" class="row g-3">
+          <div class="row">
+            <div class="col-md-6">
+              <label for="validationServer01" class="form-label"></label>
+              <input type="text" value="{{etudiants.nom}}" [ngClass]="{'is-valid':f.prenom.dirty && f.prenom.valid,'is-invalid':f.prenom.dirty && f.prenom.invalid}" class="form-control" id="validationServer01" formControlName="prenom">
+              <div class="invalid-feedback" *ngIf="(f.prenom.touched || f.prenom.dirty) && f.prenom.invalid">
+                    <div class="" *ngIf="f.prenom.errors?.required">
+                      <span>Veuiller remplir votre prenom</span>
+                    </div>
+                    <div class="" *ngIf="f.prenom.errors?.minlength">
+                      <span>Veuiller respecter le format minimum 4 lettres</span>
+                    </div>
+                    <div class="" *ngIf="f.prenom.errors?.pattern">
+                      <span>Veuiller ecrrire un nom correct avec des lettres</span>
+                    </div>
+              </div>
+              
+            </div>
+            <div class="col-md-6">
+              <label for="validationServer03" class="form-label">Nom</label>
+              <input type="text" class="form-control" id="validationServer03" aria-describedby="validationServer03Feedback" formControlName="nom" [ngClass]="{'is-valid':f.nom.dirty && f.nom.valid,'is-invalid':f.nom.dirty && f.nom.invalid}" >
+              <div class="invalid-feedback" *ngIf="(f.nom.touched  || f.prenom.dirty) && f.nom.invalid">
+                <div class="" *ngIf="f.nom.errors?.required">
+                  <span>Veuiller remplir votre nom</span>
+                </div>
+                <div class="" *ngIf="f.nom.errors?.minlength">
+                  <span>Veuiller respecter le format minimum 2 lettres</span>
+                </div>
+                <div class="" *ngIf="f.nom.errors?.pattern">
+                  <span>Veuiller ecrrire un nom correct avec des lettres</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" aria-describedby="validationServer03Feedback" formControlName="email" [ngClass]="{'is-valid':f.email.dirty && f.email.valid,'is-invalid':f.email.dirty && f.email.invalid}">
+                <div class="invalid-feedback" *ngIf="(f.email.touched  || f.email.dirty) && f.email.invalid">
+                  <div class="" *ngIf="f.email.errors?.required">
+                    <span>Veuiller remplir votre email</span>
+                  </div>
+                  <div class="" *ngIf="f.email.errors?.email  || f.email.errors?.pattern">
+                    <span>Veuiller saisir un email correct</span>
+                  </div>
+                </div>
+                <div class="invalid-feedback" *ngIf="errorEmail">
+                  <span>Cet Email existe deja</span>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+              <label for="validationServer03" class="form-label">Classe</label>
+              <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" formControlName="classe_id">
+                <option *ngFor="let class of classes" value="{{class.id}}" id="o{{class.id}}">{{class.libelle}}</option>
+              </select>
+          </div>
+          </div>
+          <div class="col-12">
+            <button class="btn btn-primary" type="submit" [disabled]="formModal.invalid">Validation</button>
+          </div>
+      </form>
+    </div>
+</div>

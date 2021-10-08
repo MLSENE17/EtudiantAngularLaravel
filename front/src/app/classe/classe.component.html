@@ -1,0 +1,28 @@
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+    <h6 class="border-bottom pb-2 mt-4">Ajouter une classe</h6>
+    <div class="mt-4">
+        <form [formGroup]="formModal" (ngSubmit)="onSubmit()" class="row g-3">
+          <div class="row">
+            <div class="col-md-6">
+              <label for="validationServer01" class="form-label">libelle</label>
+              <input type="text" [ngClass]="{'is-valid':f.libelle.dirty && f.libelle.valid,'is-invalid':f.libelle.dirty && f.libelle.invalid}" class="form-control" id="validationServer01" formControlName="libelle">
+              <div class="invalid-feedback" *ngIf="(f.libelle.touched || f.libelle.dirty) && f.libelle.invalid">
+                    <div class="" *ngIf="f.libelle.errors?.required">
+                      <span>Veuiller remplir votre libelle</span>
+                    </div>
+                    <div class="" *ngIf="f.libelle.errors?.minlength">
+                      <span>Veuiller respecter le format minimum 4 lettres</span>
+                    </div>
+                    <div class="" *ngIf="f.libelle.errors?.pattern">
+                      <span>Veuiller ecrrire un nom correct avec des lettres</span>
+                    </div>
+              </div>
+              
+            </div>
+          </div>
+          <div class="col-12">
+            <button class="btn btn-primary" type="submit" [disabled]="formModal.invalid">Validation</button>
+          </div>
+      </form>
+    </div>
+</div>
